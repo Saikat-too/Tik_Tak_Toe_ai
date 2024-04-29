@@ -19,4 +19,9 @@ def has_won(board , player):
         if all(cell == player for cell in row):
             return True
     
+    #Check Columns 
+    for col in range(3):
+        if all(board[row][col] ==player for row in range(3)):
+            return True
+    
     
