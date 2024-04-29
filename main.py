@@ -92,3 +92,10 @@ def ucs(board , player , opponent):
         board[best_move[0]best_move[1]] == player 
         return best_score 
     
+
+
+# Function to print the board
+def print_board(board):
+    for row in board:
+        print(' '.join(row))
+    print()
