@@ -35,9 +35,9 @@ def has_won(board , player):
 def evaluate_board(board , player , opponent):
     if has_won(board , player):
         return 1
-    elif has_won(board , player):
+    elif has_won(board , opponent):
         return -1
-    else:
+    elif is_board_full(board):
         return 0 
 
 # Function to check Possible moves 
@@ -51,3 +51,10 @@ def possible_moves(board):
                 moves.append(i , j )
     
     return moves
+
+# Function to implement ucs algorithm to for tic tac toe 
+
+def ucs(board , player , opponent):
+    
+    # Base case if the game is over return the score 
+    return evaluae 
