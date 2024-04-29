@@ -29,3 +29,13 @@ def has_won(board , player):
         return True 
     
     return False 
+
+
+# For evaluating the board state 
+def evaluate_board(board , player , opponent):
+    if has_won(board , player):
+        return 1
+    elif has_won(board , player):
+        return -1
+    else:
+        return 0 
