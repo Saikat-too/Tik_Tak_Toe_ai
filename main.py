@@ -42,7 +42,7 @@ def evaluate_board(board , player , opponent):
 
 # Function to check Possible moves 
 
-def possible_moves(board):
+def get_possible_moves(board):
     moves = []
     
     for i in range(3):
@@ -54,47 +54,51 @@ def possible_moves(board):
 
 # Function to implement ucs algorithm to for tic tac toe 
 
-def ucs(board , player , opponent , depth = 0 , max_depth = 9 ):
-    
-    # Base case if the game is over return the score 
-    if has_won(board , player):
-        return 1
-    elif has_won(board , opponent):
-        return -1
-    elif is_board_full(board):
-        return 0 
-    elif depth == max_depth:
-        return 0
-    
-    depth+=1
-    # Get all the possible moves
-    moves = possible_moves(board)
-    
-    # Initialize the best score and move 
+# Function to implement UCS for Tic Tac Toe (iterative)
+def ucs(board, player, opponent):
+    # Initialize a queue with the initial board state
+    queue = [(board, 0)]
     best_score = float('-inf')
     best_move = None
-    
-    #Iterate over all possible moves 
-    
-    for move in moves:
-        new_board = deepcopy(board)
-        new_board[move[0]][move[1]] == player
-        
-        #Recursively Evaluate the value 
-        score = -ucs(new_board , player , opponent)
-        
-        #Update the best score and move 
-        if score > best_score:
-            best_score = score 
-            best_move = move
-        
-    # IF no move is available return 0     
-    if best_move is None:
-        return 0 
-    
-    else:
-        board[best_move[0]][best_move[1]] == player 
-        return best_score 
+
+    while queue:
+        current_board, current_score = queue.pop(0)
+
+        # Check if the game is over
+        if has_won(current_board, player):
+            best_score = 1
+            break
+        elif has_won(current_board, opponent):
+            best_score = -1
+            break
+        elif is_board_full(current_board):
+            best_score = 0
+            break
+
+        # Get all possible moves
+        moves = get_possible_moves(current_board)
+
+        # Explore each move
+        for move in moves:
+            new_board = deepcopy(current_board)
+            new_board[move[0]][move[1]] = player
+
+            # Evaluate the opponent's best response
+            opponent_best_score = -ucs(new_board, opponent, player)
+
+            # Update the best score and move
+            if opponent_best_score > best_score:
+                best_score = opponent_best_score
+                best_move = move
+
+            # Add the new board state to the queue
+            queue.append((new_board, opponent_best_score))
+
+    # Make the best move on the original board
+    if best_move is not None:
+        board[best_move[0]][best_move[1]] = player
+
+    return best_score
     
 
 
