@@ -39,3 +39,15 @@ def evaluate_board(board , player , opponent):
         return -1
     else:
         return 0 
+
+# Function to check Possible moves 
+
+def possible_moves(board):
+    moves = []
+    
+    for i in range(3):
+        for j in range(3):
+            if board[i][j] == ' ':
+                moves.append(i , j )
+    
+    return moves
