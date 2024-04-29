@@ -11,3 +11,12 @@ def is_board_full(board):
     
     return True
 
+# Function to check if  a player has won 
+
+def has_won(board , player):
+    #Check rows 
+    for row in board:
+        if all(cell == player for cell in row):
+            return True
+    
+    
