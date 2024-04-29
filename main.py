@@ -48,7 +48,7 @@ def possible_moves(board):
     for i in range(3):
         for j in range(3):
             if board[i][j] == ' ':
-                moves.append(i , j )
+                moves.append((i , j ))
     
     return moves
 
