@@ -99,3 +99,43 @@ def print_board(board):
     for row in board:
         print(' '.join(row))
     print()
+    
+# Main function to play the game
+def play_game():
+    board = [[' ' for _ in range(3)] for _ in range(3)]
+    player = 'X'
+    opponent = 'O'
+
+    while True:
+        print_board(board)
+
+        # Human player's turn
+        if player == 'X':
+            move = input("Enter your move (row col): ").split()
+            row, col = int(move[0]), int(move[1])
+
+            if board[row][col] != ' ':
+                print("Invalid move, try again!")
+                continue
+
+            board[row][col] = player
+
+        # AI player's turn
+        else:
+            score = ucs(board, opponent, player)
+            if score == 0:
+                print("It's a tie!")
+                break
+            elif score == -1:
+                print("You win!")
+                break
+            else:
+                print("AI's move:")
+
+        # Switch players
+        player, opponent = opponent, player
+
+    print_board(board)
+
+# Play the game
+play_game()
