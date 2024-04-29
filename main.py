@@ -54,7 +54,7 @@ def possible_moves(board):
 
 # Function to implement ucs algorithm to for tic tac toe 
 
-def ucs(board , player , opponent):
+def ucs(board , player , opponent , depth = 0 , max_depth = 9 ):
     
     # Base case if the game is over return the score 
     if has_won(board , player):
@@ -63,6 +63,10 @@ def ucs(board , player , opponent):
         return -1
     elif is_board_full(board):
         return 0 
+    elif depth == max_depth:
+        return 0
+    
+    depth+=1
     # Get all the possible moves
     moves = possible_moves(board)
     
