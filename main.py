@@ -88,4 +88,7 @@ def ucs(board , player , opponent):
     if best_move is None:
         return 0 
     
+    else:
+        board[best_move[0]best_move[1]] == player 
+        return best_score 
     
