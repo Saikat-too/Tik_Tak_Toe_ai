@@ -57,4 +57,35 @@ def possible_moves(board):
 def ucs(board , player , opponent):
     
     # Base case if the game is over return the score 
-    return evaluae 
+    if has_won(board , player):
+        return 1
+    elif has_won(board , opponent):
+        return -1
+    elif is_board_full(board):
+        return 0 
+    # Get all the possible moves
+    moves = possible_moves(board)
+    
+    # Initialize the best score and move 
+    best_score = float('-inf')
+    best_move = None
+    
+    #Iterate over all possible moves 
+    
+    for move in moves:
+        new_board = deepcopy(board)
+        new_board[move[0]][move[1]] == player
+        
+        #Recursively Evaluate the value 
+        score = -ucs(new_board , player , opponent)
+        
+        #Update the best score and move 
+        if score > best_score:
+            best_score = score 
+            best_move = move
+        
+    # IF no move is available return 0     
+    if best_move is None:
+        return 0 
+    
+    
